@@ -1,7 +1,7 @@
 const asyncHandler = require("express-async-handler");
 const User = require("../Models/User");
 const generateToken = require("../Config/generateToken");
-const recipe = require("../Models/recipes");
+const recipe = require("../Models/Recipes");
 
 const registerUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
@@ -56,23 +56,25 @@ const authUser = asyncHandler(async (req, res) => {
 const allRecipes = asyncHandler(async (req, res) => {
   try {
     const recipes = await recipe.find();
-    res.status(200).json(recipes);
+    res.status(200).send(recipes);
   } catch (error) {
-    res.status(401).send(error);
+    res.status(401).send({ message: "Failed to load recipes" });
   }
 });
 const addRecipe = asyncHandler(async (req, res) => {
-  const { title, description, ingredients, steps } = req.body; // Get recipe details from request body
+  const { name, description, ingredients, steps } = req.body;
+  //console.log(req.body); // Get recipe details from request body
   try {
-    const newRecipe = await Recipe.create({
-      title,
+    const newRecipe = await recipe.create({
+      name,
       description,
       ingredients,
       steps,
     });
-    res.status(201).json(newRecipe); // Send newly created recipe as JSON response
+
+    res.status(201).send(newRecipe); // Send newly created recipe as JSON response
   } catch (error) {
-    res.status(400).json({ message: "Failed to add recipe" }); // Send error response
+    res.status(400).send(error); // Send error response
   }
 });
 
@@ -89,9 +91,9 @@ const editRecipe = asyncHandler(async (req, res) => {
     if (!updatedRecipe) {
       return res.status(404).json({ message: "Recipe not found" }); // If recipe with provided ID not found
     }
-    res.status(200).json(updatedRecipe); // Send updated recipe as JSON response
+    res.status(200).send(updatedRecipe); // Send updated recipe as JSON response
   } catch (error) {
-    res.status(400).json({ message: "Failed to update recipe" }); // Send error response
+    res.status(400).send({ message: "Failed to update recipe" }); // Send error response
   }
 });
 
@@ -101,7 +103,7 @@ const getRecipe = asyncHandler(async (req, res) => {
     const recipeOne = await recipe.findOne({ _id: id });
     return res.status(200).send(recipeOne);
   } catch (error) {
-    return res.status(400).send(error);
+    return res.status(400).send({ message: "Failed to get recipe" });
   }
 });
 

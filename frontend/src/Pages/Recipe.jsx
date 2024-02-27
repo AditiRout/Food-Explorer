@@ -1,9 +1,10 @@
-import React from 'react'
+import React from "react";
+import { State } from "../Components/StoreProvider";
 
 const Recipe = () => {
-  return (
-    <div>Recipe</div>
-  )
-}
+  const { selectedRecipe, setSelectedRecipe } = State();
 
-export default Recipe
+  return <div>Recipe</div>;
+};
+
+export default Recipe;

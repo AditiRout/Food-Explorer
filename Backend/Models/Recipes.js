@@ -2,14 +2,14 @@ const mongo = require("mongoose");
 
 const RecipeModel = mongo.Schema(
   {
-    Name: { type: String, trim: true },
-    Description: { type: Boolean, default: false },
-    Ingredients: [
+    name: { type: String, trim: true },
+    description: { type: String, default: false },
+    ingredients: [
       {
         type: String,
       },
     ],
-    Steps: {
+    steps: {
       type: String,
     },
   },

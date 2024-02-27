@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import loginBg from "../assests/login-bg.jpg";
-import { useNavigate, Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { State } from "../Components/StoreProvider";
 
@@ -46,12 +46,12 @@ const Login = () => {
     }
   };
   useEffect(() => {
-    const userInf = JSON.parse(localStorage.getItem("userInfo"));
+    const userInf = !!JSON.parse(localStorage.getItem("userInfo"));
 
     if (userInf) {
-      navigate("/user/")
+      navigate("/user/menu");
     }
-  });
+  }, []);
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col lg:flex-row">
