@@ -7,5 +7,5 @@ exports.recipeSchema = Joi.object({
   Name: Joi.string().required(),
   Description: Joi.string().required(),
   Ingredients: Joi.array().items(Joi.string()).required(),
-  Steps: Joi.array().items(Joi.string()).required(),
+  Steps: Joi.string().required(),
 });

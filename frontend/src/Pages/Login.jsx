@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import loginBg from "../assests/login-bg.jpg";
 
 const Login = () => {
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
 
   const { email, password } = formData;
@@ -19,13 +20,18 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-      <div className="sm:mx-auto sm:w-full sm:max-w-md">
+    <div className="min-h-screen bg-gray-100 flex flex-col lg:flex-row">
+    {/* Left side with background image */}
+    <div className="lg:w-1/2 bg-cover bg-center hidden lg:block" style={{backgroundImage: `url(${loginBg})`}}>
+      {/* Optionally, you can add an overlay to the background image for better readability
+      <div className="bg-black bg-opacity-50 h-full"></div> */}
+    </div>
+  
+    {/* Right side with login form */}
+    <div className="min-h-screen lg:w-1/2 flex justify-center items-center">
+      <div className="sm:w-full sm:max-w-md">
         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Log in</h2>
-      </div>
-
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+        <div className="mt-8 bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
           <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700">
@@ -42,7 +48,7 @@ const Login = () => {
                 className="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               />
             </div>
-
+  
             <div>
               <label htmlFor="password" className="block text-sm font-medium text-gray-700">
                 Password
@@ -58,7 +64,7 @@ const Login = () => {
                 className="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               />
             </div>
-
+  
             <div>
               <button
                 type="submit"
@@ -71,6 +77,9 @@ const Login = () => {
         </div>
       </div>
     </div>
+  </div>
+  
+  
   );
 };
 

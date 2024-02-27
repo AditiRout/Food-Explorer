@@ -9,11 +9,9 @@ const RecipeModel = mongo.Schema(
         type: String,
       },
     ],
-    Steps: [
-      {
-        type: String,
-      },
-    ],
+    Steps: {
+      type: String,
+    },
   },
   {
     timestamps: true,

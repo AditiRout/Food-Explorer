@@ -1,4 +1,4 @@
-import Layout from "./Components/layout";
+import Layout from "./Components/Layout";
 import AddRecipe from "./Pages/AddRecipe";
 import { Edit } from "./Pages/Edit";
 import Login from "./Pages/Login";
