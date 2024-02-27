@@ -7,12 +7,14 @@ const {
   editRecipe,
   authUser,
   getRecipe,
+  searchRecipe,
 } = require("../../Controllers/userControllers.js");
 const { protect } = require("../../Middlewares/authMiddleware.js");
 const validateFunction = require("../../Middlewares/validationMiddleware.js");
 const { recipeSchema } = require("../../Validations/validations.js");
 
 router.route("/").post(registerUser).get(protect, allRecipes);
+router.route("/search").get(protect,searchRecipe)
 router.route("/login").post(authUser);
 router
   .route("/add")

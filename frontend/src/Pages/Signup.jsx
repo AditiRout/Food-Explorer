@@ -1,5 +1,7 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate, Navigate } from "react-router-dom";
+import { State } from "../Components/StoreProvider";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -7,6 +9,8 @@ const Signup = () => {
     password: "",
     confirmPassword: "",
   });
+  const { user, setUser } = State();
+  const navigate = useNavigate();
 
   const { email, password, confirmPassword } = formData;
 
@@ -14,11 +18,44 @@ const Signup = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Add your signup logic here
-    console.log(formData);
+    if (!email || !password || !confirmPassword) {
+      alert("Fill all the details");
+      return;
+    } else if (confirmPassword !== password) {
+      alert("confirmPassword doesnt match with password");
+      return;
+    }
+    try {
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+        },
+      };
+      const { data } = await axios.post(
+        "http://localhost:5000/api/user",
+        {
+          email,
+          password,
+        },
+        config
+      );
+      console.log(data);
+      alert("login succesfull");
+      localStorage.setItem("userInfo", JSON.stringify(data));
+      navigate("/user/menu");
+    } catch (error) {
+      alert(error);
+    }
   };
+  useEffect(() => {
+    const userInf = JSON.parse(localStorage.getItem("userInfo"));
+
+    if (userInf) {
+      <Navigate to="/user/menu" />;
+    }
+  });
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col justify-center py-12 sm:px-6 lg:px-8">

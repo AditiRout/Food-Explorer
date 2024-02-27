@@ -5,6 +5,7 @@ const recipe = require("../Models/recipes");
 
 const registerUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
+  console.log(req.body);
 
   try {
     if (!email || !password) {
@@ -24,12 +25,13 @@ const registerUser = asyncHandler(async (req, res) => {
 
     if (user) {
       res.status(200).send({
-        _id: user._id,
+        // _id: user._id,
         email: user.email,
         token: generateToken(user._id),
       });
     }
   } catch (error) {
+    console.log(error);
     res.status(400).send(error);
   }
 });
@@ -41,7 +43,7 @@ const authUser = asyncHandler(async (req, res) => {
 
     if (user && (await user.matchPassword(password))) {
       res.status(200).send({
-        _id: user._id,
+        // _id: user._id,
         email: user.email,
         token: generateToken(user._id),
       });

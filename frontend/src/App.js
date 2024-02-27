@@ -1,3 +1,4 @@
+
 import Layout from "./Components/Layout";
 import AddRecipe from "./Pages/AddRecipe";
 import { Edit } from "./Pages/Edit";
@@ -8,7 +9,9 @@ import ProtectedRoute from "./Routes/ProtectedRoute";
 import "./output.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+
 function App() {
+  
   return (
     <BrowserRouter>
       <Routes>
@@ -21,13 +24,13 @@ function App() {
           path="/user/*"
           element={
             <ProtectedRoute>
-              <Layout>
-                <Routes>
-                  <Route path="/menu" element={<MainMenu />} />
-                  <Route path="/add" element={<AddRecipe />} />
-                  <Route path="/edit" element={<Edit />} />
-                </Routes>
-              </Layout>
+              {/* <Layout> */}
+              <Routes>
+                <Route path="/menu" element={<MainMenu />} />
+                <Route path="/add" element={<AddRecipe />} />
+                <Route path="/edit" element={<Edit />} />
+              </Routes>
+              {/* </Layout> */}
             </ProtectedRoute>
           }
         />
