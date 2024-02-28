@@ -1,7 +1,5 @@
-
 import Layout from "./Components/Layout";
 import AddRecipe from "./Pages/AddRecipe";
-import { Edit } from "./Pages/Edit";
 import Login from "./Pages/Login";
 import MainMenu from "./Pages/MainMenu";
 import Recipe from "./Pages/Recipe";
@@ -9,10 +7,9 @@ import Signup from "./Pages/Signup";
 import ProtectedRoute from "./Routes/ProtectedRoute";
 import "./output.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
+import EditRecipe from "./Pages/EditRecipe";
 
 function App() {
-  
   return (
     <BrowserRouter>
       <Routes>
@@ -26,12 +23,12 @@ function App() {
           element={
             <ProtectedRoute>
               <Layout>
-              <Routes>
-                <Route path="/menu" element={<MainMenu />} />
-                <Route path="/add" element={<AddRecipe />} />
-                <Route path="/edit/:id" element={<Edit />} />
-                <Route path="/menu/:id" element={<Recipe/>}/>
-              </Routes>
+                <Routes>
+                  <Route path="/menu" element={<MainMenu />} />
+                  <Route path="/add" element={<AddRecipe />} />
+                  <Route path="/edit/:id" element={<EditRecipe />} />
+                  <Route path="/menu/:id" element={<Recipe />} />
+                </Routes>
               </Layout>
             </ProtectedRoute>
           }

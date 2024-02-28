@@ -19,12 +19,15 @@ const Layout = ({ children }) => {
           <div className="flex justify-between items-center">
             <div className="flex space-x-4 justify-end">
               {/* Add Recipe Button */}
-              <Link to="/user/add" className="text-white hover:text-gray-300">
+              <Link
+                to="/user/add"
+                className="text-white hover:text-gray-300"
+              >
                 Add Recipe
               </Link>
               <button
                 className="text-white hover:text-gray-300"
-                onClick={logoutHandler} 
+                onClick={logoutHandler}
               >
                 Logout
               </button>
@@ -37,7 +40,7 @@ const Layout = ({ children }) => {
       {/* Main content */}
       <main className="flex-1">{children}</main>
 
-      {/* Footer */}
+   
       <footer className="bg-gray-800 py-4 text-white text-center">
         <div className="container mx-auto">
           © 2024 My Recipe App. All rights reserved.

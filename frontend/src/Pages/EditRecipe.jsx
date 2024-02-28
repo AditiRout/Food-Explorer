@@ -1,15 +1,47 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
-const AddRecipe = () => {
+const EditRecipe = () => {
+  const { id } = useParams();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
-    description: "", // Initialize ingredients as an empty array
+    description: "",
+    ingredients: [],
     steps: "",
   });
   const [ingredientInputs, setIngredientInputs] = useState([""]);
+
+  useEffect(() => {
+    const fetchRecipeData = async () => {
+      const user = JSON.parse(localStorage.getItem("userInfo"));
+      try {
+        const config = {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+            "Content-Type": "application/json",
+          },
+        };
+        const response = await axios.get(
+          `http://localhost:5000/api/user/${id}`,
+          config
+        );
+        const data = response.data;
+        setFormData({
+          name: data.name,
+          description: data.description,
+          ingredients: data.ingredients, // Assign ingredients directly as an array
+          steps: data.steps,
+        });
+        setIngredientInputs(data.ingredients);
+      } catch (error) {
+        console.error("Error fetching recipe data:", error);
+      }
+    };
+
+    fetchRecipeData();
+  }, [id]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -33,11 +65,11 @@ const AddRecipe = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(ingredientInputs);
     // const trimmedIngredients = ingredientInputs.filter(
     //   (ing) => ing.trim() !== ""
     // );
     setFormData({ ...formData, ingredients: ingredientInputs });
+    console.log(ingredientInputs);
     const requestData = {
       name: formData.name,
       description: formData.description,
@@ -49,16 +81,16 @@ const AddRecipe = () => {
       const config = {
         headers: {
           Authorization: `Bearer ${user.token}`,
+          "Content-Type": "application/json",
         },
       };
-      // console.log(requestData);
-      const response = await axios.post(
-        "http://localhost:5000/api/user/add",
-        requestData, // Send formData including ingredients to the backend
+      console.log(requestData);
+      const response = await axios.put(
+        `http://localhost:5000/api/user/${id}`,
+        requestData,
         config
       );
-
-      alert("Recipe created");
+      alert("Update success");
       navigate("/user/menu");
     } catch (error) {
       alert(error);
@@ -67,7 +99,7 @@ const AddRecipe = () => {
 
   return (
     <div className="max-w-2xl mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
-      <h2 className="text-2xl font-semibold mb-6">Add Recipe</h2>
+      <h2 className="text-2xl font-semibold mb-6">Edit Recipe</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <input
@@ -94,7 +126,7 @@ const AddRecipe = () => {
         <div className="mb-4">
           <textarea
             name="steps"
-            placeholder="Steps(Write in paragraph..we will add the bullets)"
+            placeholder="Steps"
             rows={4}
             value={formData.steps}
             onChange={handleChange}
@@ -135,11 +167,11 @@ const AddRecipe = () => {
           type="submit"
           className="px-4 py-2 bg-indigo-500 text-white rounded-md hover:bg-indigo-600 focus:outline-none"
         >
-          Add Recipe
+          Save Changes
         </button>
       </form>
     </div>
   );
 };
 
-export default AddRecipe;
+export default EditRecipe;

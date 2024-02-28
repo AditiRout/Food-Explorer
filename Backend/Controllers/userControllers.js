@@ -81,11 +81,12 @@ const addRecipe = asyncHandler(async (req, res) => {
 // Edit recipe
 const editRecipe = asyncHandler(async (req, res) => {
   const { id } = req.params; // Get recipe ID from request params
-  const { title, description, ingredients, steps } = req.body; // Get updated recipe details from request body
+  const { name, description, ingredients, steps } = req.body;
+  console.log(req.body); // Get updated recipe details from request body
   try {
     const updatedRecipe = await recipe.findByIdAndUpdate(
       id,
-      { title, description, ingredients, steps },
+      { name, description, ingredients, steps },
       { new: true }
     );
     if (!updatedRecipe) {

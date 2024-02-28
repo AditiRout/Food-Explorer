@@ -10,6 +10,7 @@ const MainMenu = () => {
   const handleChange = async (id) => {
     try {
       setSelectedRecipe(id);
+      //console.log(selectedRecipe);
     } catch (error) {
       alert(error);
     }
@@ -45,18 +46,18 @@ const MainMenu = () => {
           {recipes.map((recipe) => (
             <div
               key={recipe._id}
-              className="relative mx-auto max-w-md rounded-lg bg-gradient-to-tr from-pink-300 to-blue-300 p-0.5 shadow-lg overflow-hidden"
+              className="relative mx-auto max-w-full md:max-w-md  min-w-40 w-80 h-30 rounded-lg bg-gradient-to-tr from-pink-300 to-blue-300 p-0.5 shadow-lg overflow-hidden"
             >
               <div className="bg-white p-7 rounded-md">
                 <h2 className="font-bold text-xl mb-2 text-cyan-800 ">
                   {recipe.name}
                 </h2>
-                <p>{recipe.description}</p>
+                {/* <p>{recipe.description}</p> */}
                 <div className="mt-4 flex justify-between items-center">
                   <Link
                     to={`/user/menu/${recipe._id}`}
                     className="text-blue-600 hover:text-blue-800 font-semibold"
-                    onClick={() => handleChange(recipe._id)}
+                    onClick={handleChange(recipe._id)}
                   >
                     View Recipe
                   </Link>
@@ -77,4 +78,3 @@ const MainMenu = () => {
 };
 
 export default MainMenu;
-
