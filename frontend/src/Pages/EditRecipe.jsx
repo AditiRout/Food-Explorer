@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 
 const EditRecipe = () => {
@@ -163,12 +163,25 @@ const EditRecipe = () => {
             Add Ingredient
           </button>
         </div>
-        <button
-          type="submit"
-          className="px-4 py-2 bg-indigo-500 text-white rounded-md hover:bg-indigo-600 focus:outline-none"
-        >
-          Save Changes
-        </button>
+        <div className="mb-2 flex gap-2">
+          <button
+            type="submit"
+            className="px-4 py-2 bg-indigo-500 text-white rounded-md hover:bg-indigo-600 focus:outline-none"
+          >
+            Save Changes
+          </button>
+          <button
+            type="submit"
+            className="px-4 py-2 bg-indigo-500 text-white rounded-md hover:bg-indigo-600 focus:outline-none"
+          >
+            <Link
+              to="/user/menu"
+              className="px-4 py-2 bg-indigo-500 text-white rounded-md hover:bg-indigo-600 focus:outline-none"
+            >
+              Cancel
+            </Link>
+          </button>
+        </div>
       </form>
     </div>
   );
