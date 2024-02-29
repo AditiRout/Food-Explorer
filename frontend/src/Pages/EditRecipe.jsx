@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import axios from "axios";
-
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const EditRecipe = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -24,7 +25,7 @@ const EditRecipe = () => {
           },
         };
         const response = await axios.get(
-          `http://localhost:5000/api/user/${id}`,
+          `https://food-explorer-1.onrender.com/api/user/${id}`,
           config
         );
         const data = response.data;
@@ -86,14 +87,14 @@ const EditRecipe = () => {
       };
       console.log(requestData);
       const response = await axios.put(
-        `http://localhost:5000/api/user/${id}`,
+        `https://food-explorer-1.onrender.com/api/user/${id}`,
         requestData,
         config
       );
-      alert("Update success");
+      toast.success("Update Success!");
       navigate("/user/menu");
     } catch (error) {
-      alert(error);
+      toast.error(error)
     }
   };
 

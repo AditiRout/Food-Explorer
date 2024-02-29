@@ -1,16 +1,16 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate, Navigate } from "react-router-dom";
-import { State } from "../Components/StoreProvider";
 import loginBg from "../assests/login-bg.jpg";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const Signup = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
     confirmPassword: "",
   });
- 
- 
+
   const navigate = useNavigate();
 
   const { email, password, confirmPassword } = formData;
@@ -22,10 +22,10 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!email || !password || !confirmPassword) {
-      alert("Fill all the details");
+      toast.warning("Fill all details!");
       return;
     } else if (confirmPassword !== password) {
-      alert("confirmPassword doesnt match with password");
+      toast.warning("Confirm password doesnt match with password!");
       return;
     }
     try {
@@ -35,7 +35,7 @@ const Signup = () => {
         },
       };
       const { data } = await axios.post(
-        "http://localhost:5000/api/user",
+        "https://food-explorer-1.onrender.com/api/user",
         {
           email,
           password,
@@ -44,10 +44,10 @@ const Signup = () => {
       );
       console.log(data);
       localStorage.setItem("userInfo", JSON.stringify(data));
-     
+
       navigate("/user/menu");
     } catch (error) {
-      alert(error);
+      toast.error(error);
     }
   };
   useEffect(() => {

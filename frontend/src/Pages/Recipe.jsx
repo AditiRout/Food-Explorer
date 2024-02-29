@@ -15,7 +15,7 @@ const Recipe = () => {
           },
         };
         const response = await axios.get(
-          `http://localhost:5000/api/user/${id}`,
+          `https://food-explorer-1.onrender.com/api/user/${id}`,
           config
         );
         const data = response.data;

@@ -19,7 +19,7 @@ const MainMenu = () => {
       setLoading(true);
       setError(null);
       const response = await axios.get(
-        `http://localhost:5000/api/user/search?searchTerm=${query}`,
+        `https://food-explorer-1.onrender.com/api/user/search?searchTerm=${query}`,
         config
       );
       setRecipes(response.data);
@@ -39,7 +39,7 @@ const MainMenu = () => {
         },
       };
       const response = await axios.get(
-        "http://localhost:5000/api/user/recipes",
+        "https://food-explorer-1.onrender.com/api/user/recipes",
         config
       );
       setRecipes(response.data);

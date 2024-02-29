@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const AddRecipe = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -53,15 +54,15 @@ const AddRecipe = () => {
       };
       // console.log(requestData);
       const response = await axios.post(
-        "http://localhost:5000/api/user/add",
+        "https://food-explorer-1.onrender.com/api/user/add",
         requestData, // Send formData including ingredients to the backend
         config
       );
 
-      alert("Recipe created");
+      toast.success("Recipe Created!");
       navigate("/user/menu");
     } catch (error) {
-      alert(error);
+      toast.error(error)
     }
   };
 

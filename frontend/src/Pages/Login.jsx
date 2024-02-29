@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import loginBg from "../assests/login-bg.jpg";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { State } from "../Components/StoreProvider";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!email || !password) {
-      alert("Fill all the details");
+      toast.warning("Fill all the details!");
       return;
     }
     try {
@@ -30,19 +31,18 @@ const Login = () => {
         },
       };
       const { data } = await axios.post(
-        "http://localhost:5000/api/user/login",
+        "https://food-explorer-1.onrender.com/api/user/login",
         {
           email,
           password,
         },
         config
       );
-      console.log(data);
-      alert("login succesfull");
+      toast.success("Login successful!");
       localStorage.setItem("userInfo", JSON.stringify(data));
       navigate("/user/menu");
     } catch (error) {
-      alert(error);
+      toast.error(error);
     }
   };
   useEffect(() => {
