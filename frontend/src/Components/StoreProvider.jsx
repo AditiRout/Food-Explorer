@@ -1,8 +1,8 @@
-import React, { useEffect, createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 
 const storeContext = createContext();
 const StoreProvider = ({ children }) => {
-  const [selectedRecipe, setSelectedRecipe] = useState("");
+  const [selectedRecipe, setSelectedRecipe] = useState([]);
 
   return (
     <storeContext.Provider

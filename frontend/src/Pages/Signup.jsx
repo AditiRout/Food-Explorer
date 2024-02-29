@@ -10,7 +10,7 @@ const Signup = () => {
     confirmPassword: "",
   });
  
-  const { user, setUser } = State();
+ 
   const navigate = useNavigate();
 
   const { email, password, confirmPassword } = formData;

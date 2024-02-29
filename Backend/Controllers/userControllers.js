@@ -109,7 +109,7 @@ const getRecipe = asyncHandler(async (req, res) => {
 });
 
 const searchRecipe = asyncHandler(async (req, res) => {
-  const { keyword } = req.query;
+  const { searchTerm } = req.query;
   try {
     const recipes = await recipe.find({
       $or: [
