@@ -22,10 +22,10 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!email || !password || !confirmPassword) {
-      toast.warning("Fill all details!");
+      toast.warn("Fill all details!");
       return;
     } else if (confirmPassword !== password) {
-      toast.warning("Confirm password doesnt match with password!");
+      toast.warn("Confirm password doesnt match with password!");
       return;
     }
     try {

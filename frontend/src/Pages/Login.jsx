@@ -21,7 +21,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!email || !password) {
-      toast.warning("Fill all the details!");
+      toast.warn("Fill all the details!");
       return;
     }
     try {
