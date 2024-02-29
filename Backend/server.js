@@ -10,13 +10,22 @@ const connectDB = require("./Config/db");
 
 dotenv.config();
 const app = express();
-// mongoose.connect(process.env.DB_URL, {
-//    useNewUrlParser: true,
-//    useUnifiedTopology: true
-// }, () => {
-//   console.log('Database connected');
-// })
-connectDB();
+mongoose.connect(process.env.DB_URL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
+// Get the default connection
+const db = mongoose.connection;
+
+// Bind connection to error event (to get notification of connection errors)
+db.on("error", console.error.bind(console, "MongoDB connection error:"));
+
+// Bind connection to open event (to get notification of successful connection)
+db.once("open", () => {
+  console.log("Database connected");
+});
+
 app.use(express.json()); // to accept json data
 app.use(
   cors({
